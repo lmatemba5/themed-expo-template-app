@@ -21,7 +21,6 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -31,7 +30,6 @@ const Settings = () => {
 
   const [showThemeModal, setShowThemeModal] = useState(false);
   const [showFontModal, setShowFontModal] = useState(false);
-  const insets = useSafeAreaInsets();
 
   const [fontsLoaded] = useFonts({
     NunitoSans_400Regular,
@@ -69,7 +67,7 @@ const Settings = () => {
     );
   };
 
-  const styles = createStyles(theme, currentTheme, fontsLoaded, fontSizeMultiplier, insets);
+  const styles = createStyles(theme, currentTheme, fontsLoaded, fontSizeMultiplier);
 
   if (!fontsLoaded) {
     return (
@@ -251,15 +249,14 @@ const Settings = () => {
   );
 };
 
-const createStyles = (theme, colorScheme, fontsLoaded, fontSizeMultiplier, insets) => {
+const createStyles = (theme, colorScheme, fontsLoaded, fontSizeMultiplier) => {
   const baseFontSize = 16 * fontSizeMultiplier;
 
   return StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.background,
-      padding: 20,
-      paddingBottom: insets.bottom
+      padding: 20
     },
     loadingContainer: {
       flex: 1,
@@ -364,7 +361,7 @@ const createStyles = (theme, colorScheme, fontsLoaded, fontSizeMultiplier, inset
     // Modal Styles
     modalOverlay: {
       flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backgroundColor: 'transparent',
       justifyContent: 'center',
       alignItems: 'center',
       paddingHorizontal: 20,
@@ -372,6 +369,8 @@ const createStyles = (theme, colorScheme, fontsLoaded, fontSizeMultiplier, inset
     modalContent: {
       backgroundColor: theme.cardBackground,
       borderRadius: 20,
+      borderWidth: 1,
+      borderColor: "lightgray",
       padding: 24,
       width: screenWidth - 40,
       maxWidth: 400,

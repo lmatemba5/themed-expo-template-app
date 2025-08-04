@@ -23,11 +23,11 @@ export default function TabLayout() {
           },
           tabBarShowLabel: false,
           tabBarStyle: {
-            height: 130,
+            height: 120,
             backgroundColor: theme.background
           },
           tabBarItemStyle: {
-            minHeight: 130,
+            minHeight: 120,
             paddingTop: 20,
           },
         }}

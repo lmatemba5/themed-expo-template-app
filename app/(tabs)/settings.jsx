@@ -58,6 +58,7 @@ const Settings = () => {
           try {
             await AsyncStorage.clear();
             Alert.alert('Success', 'Cache cleared successfully!');
+            await updateTheme("light")
           } catch (error) {
             console.error('Error clearing cache:', error);
             Alert.alert('Error', 'Failed to clear cache');
@@ -112,8 +113,7 @@ const Settings = () => {
 
               {[
                 { key: 'light', label: 'Light', icon: '☀️' },
-                { key: 'dark', label: 'Dark', icon: '🌙' },
-                { key: 'system', label: 'System Default', icon: '📱' },
+                { key: 'dark', label: 'Dark', icon: '🌙' }
               ].map((option) => (
                 <Pressable
                   key={option.key}
@@ -210,7 +210,7 @@ const Settings = () => {
           <SettingItem
             icon="🎨"
             title="Theme"
-            subtitle={`Current: ${themeMode === 'system' ? 'System Default' : themeMode.charAt(0).toUpperCase() + themeMode.slice(1)}`}
+            subtitle={`Current: ${themeMode === 'dark' ? 'Dark' : "Light"}`}
             onPress={() => setShowThemeModal(true)}
             showArrow
           />
@@ -226,7 +226,7 @@ const Settings = () => {
 
         {/* Data & Sync Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Data</Text>
+          <Text style={[styles.sectionTitle, {marginTop: 32}]}>Data</Text>
           <SettingItem
             icon="🗑️"
             title="Clear Cache"

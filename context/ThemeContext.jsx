@@ -25,15 +25,12 @@ export const useFont = () => {
 
 export const ThemeProvider = ({ children }) => {
   const systemColorScheme = useColorScheme();
-  const [themeMode, setThemeMode] = useState("system");
-  const [fontSize, setFontSize] = useState("medium");
+  const [themeMode, setThemeMode] = useState("light");
+  const [fontSize, setFontSize] = useState("small");
   const [isLoading, setIsLoading] = useState(true);
 
   // Determine current theme
-  const currentTheme = themeMode === "system" ? systemColorScheme === "dark"
-        ? "dark"
-        : "light"
-      : themeMode;
+  const currentTheme = themeMode === "dark" ? "dark" : systemColorScheme === "dark" ? "dark" : "light";
 
   const theme = Colors[currentTheme];
 
@@ -41,7 +38,6 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     loadSettings();
   }, []);
-
 
   // Get font size multiplier
   const getFontSizeMultiplier = () => {
